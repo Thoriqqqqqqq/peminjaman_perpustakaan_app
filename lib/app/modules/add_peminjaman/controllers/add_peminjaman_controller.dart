@@ -38,18 +38,18 @@ class AddPeminjamanController extends GetxController {
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
       if (formKey.currentState!.validate()) {
-        final response = await ApiProvider.instance().post(Endpoint.register, data: {
-              "user_ud": StorageProvider.read(StorageKey.idUser),
+        final response = await ApiProvider.instance().post(Endpoint.pinjam, data: {
+              "user_id": StorageProvider.read(StorageKey.idUser),
               "book_id": Get.parameters['id'],
               "tanggal_pinjam": tanggalPinjamController.text.toString(),
-              "tanggam_kembali": tanggalKembaliController.text.toString(),
+              "tanggal_kembali": tanggalKembaliController.text.toString(),
         });
         if (response.statusCode == 201) {
-          Get.snackbar("infomation", "Register Succes", backgroundColor: Colors.green);
-          Get.offAllNamed(Routes.LOGIN);
+          Get.snackbar("infomation", "pinjam Succes", backgroundColor: Colors.green);
+          Get.offAllNamed(Routes.PEMINJAMAN);
         } else {
           Get.snackbar(
-              "Sorry", "register Gagal", backgroundColor: Colors.red);
+              "Sorry", "pinjam Gagal", backgroundColor: Colors.red);
         }
       }
       loadingpinjam(false);
